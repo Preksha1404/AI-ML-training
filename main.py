@@ -1,28 +1,51 @@
-# logging levels
-# DEBUG, INFO, WARNING, ERROR, CRITICAL
-# By default, the logging module logs the messages with a logging level of WARNING or above.
-
 import logging
+import employee
 
-logging.basicConfig(filename='employee.log', level=logging.INFO,
-                    format='%(asctime)s:%(levelname)s:%(message)s')
-class Employee:
-    """A sample Employee class"""
+# Set logger
+logger= logging.getLogger(__name__)
 
-    def __init__(self, first, last):
-        self.first = first
-        self.last = last
+logger.setLevel(logging.DEBUG)
 
-        logging.info('Created Employee: {} - {}'.format(self.fullname, self.email))
+file_handler=logging.FileHandler('test.log')
+logger.addHandler(file_handler)
 
-    @property
-    def email(self):
-        return '{}.{}@email.com'.format(self.first, self.last)
+formatter=logging.Formatter('%(asctime)s:%(levelname)s:%(name)s:%(message)s')
+file_handler.setFormatter(formatter)
 
-    @property
-    def fullname(self):
-        return '{} {}'.format(self.first, self.last)
+# logging.basicConfig(filename='test.log', level=logging.DEBUG,
+#                     format='%(asctime)s:%(levelname)s:%(name)s:%(message)s')
 
-emp_1 = Employee('John', 'Smith')
-emp_2 = Employee('Corey', 'Schafer')
-emp_3 = Employee('Jane', 'Doe')
+def add(x, y):
+    return x + y
+
+
+def subtract(x, y):
+    return x - y
+
+
+def multiply(x, y):
+    return x * y
+
+
+def divide(x, y):
+    return x / y
+
+
+num_1 = 20
+num_2 = 10
+
+add_result = add(num_1, num_2)
+# logging.debug('Add: {} + {} = {}'.format(num_1, num_2, add_result))
+logger.debug('Add: {} + {} = {}'.format(num_1, num_2, add_result))
+
+sub_result = subtract(num_1, num_2)
+# logging.debug('Sub: {} - {} = {}'.format(num_1, num_2, sub_result))
+logger.debug('Sub: {} - {} = {}'.format(num_1, num_2, sub_result))
+
+mul_result = multiply(num_1, num_2)
+# logging.debug('Mul: {} * {} = {}'.format(num_1, num_2, mul_result))
+logger.debug('Mul: {} * {} = {}'.format(num_1, num_2, mul_result))
+
+div_result = divide(num_1, num_2)
+# logging.debug('Div: {} / {} = {}'.format(num_1, num_2, div_result))
+logger.debug('Div: {} / {} = {}'.format(num_1, num_2, div_result))
